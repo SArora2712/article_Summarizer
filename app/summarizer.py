@@ -1,32 +1,28 @@
 import nltk
 import networkx as nx
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
-from app.utils import sentence_similarity_matrix
 
 nltk.download('punkt')
 
 def read_article(text):
-    sentences = nltk.sent_tokenize(text)
-    return sentences
+    return nltk.sent_tokenize(text)
 
-def summarize(text, top_n=3, return_scores=False):
+def sentence_similarity_matrix(sentences):
+    vectorizer = TfidfVectorizer()
+    tfidf = vectorizer.fit_transform(sentences)
+    sim_matrix = cosine_similarity(tfidf)
+    np.fill_diagonal(sim_matrix, 0)
+    return sim_matrix
+
+def summarize(text, top_n=5, return_scores=False):
     sentences = read_article(text)
-
-    if len(sentences) <= top_n:
-        return sentences
-
     sim_matrix = sentence_similarity_matrix(sentences)
     graph = nx.from_numpy_array(sim_matrix)
     scores = nx.pagerank(graph)
 
-    ranked = sorted(
-        ((scores[i], s) for i, s in enumerate(sentences)),
-        reverse=True
-    )
-
-    summary = [s for _, s in ranked[:top_n]]
-
+    ranked = sorted(((scores[i], s) for i, s in enumerate(sentences)), reverse=True)
     if return_scores:
-        return ranked
-
-    return summary
+        return ranked[:top_n]
+    return [s for _, s in ranked[:top_n]]
