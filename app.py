@@ -16,7 +16,7 @@ st.markdown(
     """
     <h2 style="text-align:center;">Context-Aware Article Summarizer</h2>
     <p style="text-align:center; color:gray;">
-    One article · Four audiences · Different summaries
+    Generate summaries for students, professionals, researchers, or general readers — all from the same article.
     </p>
     """,
     unsafe_allow_html=True
@@ -82,7 +82,7 @@ if generate:
             wc_image = wc.to_array()
 
         st.divider()
-        st.subheader(f"{audience.capitalize()} Summary")
+        st.subheader(f"Summary")
 
         col1, col2 = st.columns([2, 1])
 
