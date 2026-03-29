@@ -1,4 +1,4 @@
-### *** Context-Aware Article Summarizer***
+# Context-Aware Article Summarizer
 
 A smart NLP-based web application that generates different summaries of the same article based on the target audience — Student, Professional, Researcher, or General.
 
@@ -13,14 +13,14 @@ This project demonstrates context-aware NLP, showing how summaries can adapt to 
     Modular architecture separating NLP, audience logic, file handling, and UI
     Production-style features like file upload, visualization, and PDF export
 
-# Supported Audiences
+## Supported Audiences
 **Student**: Simple language, definitions,learning-focused
 **Professional**: Concise, insight-driven, decision-oriented
 **Researcher**: Technical, information-dense, keyword-heavy
 **General**:	Balanced, neutral, easy-to-read
 Each audience receives a different summary from the same article.
 
-# Features
+## Features
     Extractive summarization using TextRank
     Audience-specific sentence selection
     Adjustable summary length
@@ -37,7 +37,7 @@ Each audience receives a different summary from the same article.
     Summary + Word Cloud
     Export generated summary as PDF (summary + Word Cloud together)
 
-# How It Works
+## How It Works
     Text Extraction – Reads text from file or text area
     Sentence Tokenization – NLTK splits content into sentences
     Vectorization – TF-IDF vectors for sentences
@@ -46,7 +46,7 @@ Each audience receives a different summary from the same article.
     Audience-Aware Selection – Chooses sentences tailored to target audience
     UI Rendering – Streamlit frontend with export and visualization
 
-# Tech Stack
+## Tech Stack
     Python 3.13
     NLTK
     Scikit-learn
@@ -57,7 +57,7 @@ Each audience receives a different summary from the same article.
     python-docx
     ReportLab
 
-# Setup & Run Instructions
+## Setup & Run Instructions
     # Clone the repo
     git clone <your-repo-url>
     cd <your-project-folder>
@@ -76,13 +76,13 @@ Each audience receives a different summary from the same article.
     # Run the Streamlit app
     streamlit run app.py
 
-# Future Enhancements
+## Future Enhancements
     Abstractive summarization (T5 / BART)
     Readability scoring per audience
     Side-by-side audience comparison
     Highlight factual vs analytical sentences
 
-# Use Cases
+## Use Cases
     Educational platforms
     Research assistants
     Business insights summarization
