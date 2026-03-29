@@ -1,4 +1,4 @@
-**#  Context-Aware Article Summarizer**
+###*** Context-Aware Article Summarizer***
 
 A smart NLP-based web application that generates different summaries of the same article based on the target audience — Student, Professional, Researcher, or General.
 
