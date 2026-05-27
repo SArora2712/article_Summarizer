@@ -1,91 +1,68 @@
-# Context-Aware Article Summarizer
+# Context-Aware Article Summariser
 
-A smart NLP-based web application that generates different summaries of the same article based on the target audience — Student, Professional, Researcher, or General.
+An NLP web application that generates audience-adaptive summaries from any document. Built with TextRank + TF-IDF cosine similarity and deployed as a live Streamlit app.
 
-Unlike standard summarizers, this system adapts language depth, sentence selection, and focus according to the reader.
 
-###   Why This Project Matters
+---
 
-Most summarization tools generate a single generic summary.
-This project demonstrates context-aware NLP, showing how summaries can adapt to the reader’s background:
-    Audience-aware sentence selection
-    Practical use of TextRank (graph-based ranking)
-    Modular architecture separating NLP, audience logic, file handling, and UI
-    Production-style features like file upload, visualization, and PDF export
+## What it does
 
-## Supported Audiences
-**Student**: Simple language, definitions,learning-focused
-**Professional**: Concise, insight-driven, decision-oriented
-**Researcher**: Technical, information-dense, keyword-heavy
-**General**:	Balanced, neutral, easy-to-read
-Each audience receives a different summary from the same article.
+Most summarisers give you one generic output. This one asks who's reading it. You pick an audience profile and the summary adjusts — the same article reads differently for a software engineer, a business executive, a student, or a general audience.
+
+Under the hood it uses TextRank (graph-based sentence ranking) combined with TF-IDF cosine similarity to score sentences by relevance. No LLM API calls, no cost, runs entirely locally.
+
+---
 
 ## Features
-    Extractive summarization using TextRank
-    Audience-specific sentence selection
-    Adjustable summary length
-    Handles long articles (≤ 2000 words recommended)
-    Clear bullet-pointed summaries
-    Input Support
-    Paste raw text
-    Upload TXT, PDF, or DOCX files
-    Visualization & Export
-    Word cloud visualization
-    Multiple display modes:
-    Summary only
-    Word Cloud only
-    Summary + Word Cloud
-    Export generated summary as PDF (summary + Word Cloud together)
 
-## How It Works
-    Text Extraction – Reads text from file or text area
-    Sentence Tokenization – NLTK splits content into sentences
-    Vectorization – TF-IDF vectors for sentences
-    Similarity Graph – Cosine similarity + NetworkX graph
-    TextRank Scoring – PageRank for sentence importance
-    Audience-Aware Selection – Chooses sentences tailored to target audience
-    UI Rendering – Streamlit frontend with export and visualization
+- **4 audience profiles** — Technical · General · Executive · Student
+- **Multi-format input** — Upload TXT, PDF, or DOCX files
+- **WordCloud visualisation** — Visual keyword map of the summarised content
+- **One-click PDF export** — Download the summary as a formatted PDF
+- **Fully deployed** — Live on Streamlit Cloud, no setup needed to try it
 
-## Tech Stack
-    Python 3.13
-    NLTK
-    Scikit-learn
-    NetworkX
-    Streamlit
-    WordCloud
-    PyPDF2
-    python-docx
-    ReportLab
+---
 
-## Setup & Run Instructions
-    # Clone the repo
-    git clone <your-repo-url>
-    cd <your-project-folder>
+## Tech stack
 
-    # Create a virtual environment
-    python -m venv venv
-    # Activate it
-    # Windows:
-    venv\Scripts\activate
-    # Mac/Linux:
-    source venv/bin/activate
+| Component | Technology |
+|-----------|------------|
+| NLP core | TextRank · TF-IDF · NLTK |
+| Similarity | Cosine similarity (NumPy) |
+| Web app | Streamlit |
+| File handling | PyPDF2 · python-docx |
+| Visualisation | WordCloud · Matplotlib |
+| Export | FPDF |
 
-    # Install dependencies
-    pip install -r requirements.txt
+---
 
-    # Run the Streamlit app
-    streamlit run app.py
+## Run it locally
 
-## Future Enhancements
-    Abstractive summarization (T5 / BART)
-    Readability scoring per audience
-    Side-by-side audience comparison
-    Highlight factual vs analytical sentences
+```bash
+git clone https://github.com/SArora2712/article_Summarizer.git
+cd article_Summarizer
+pip install -r requirements.txt
+streamlit run app.py
+```
 
-## Use Cases
-    Educational platforms
-    Research assistants
-    Business insights summarization
-    Knowledge management tools
-    Portfolio / resume-grade NLP demonstration
+---
 
+## How it works
+
+1. Text is extracted from the uploaded file
+2. Sentences are tokenised and cleaned
+3. TF-IDF vectors are computed for each sentence
+4. Cosine similarity matrix is built across all sentence pairs
+5. TextRank scores each sentence based on its connections (like PageRank for text)
+6. Top-N sentences are selected based on the chosen audience profile's compression ratio
+7. Output is rendered in the app with optional WordCloud and PDF export
+
+---
+
+## Project context
+
+Built as part of my NLP work alongside my internship at Infosys Springboard. The audience-adaptive logic came from a real observation — the same document needs to be read very differently depending on who's reading it, and most summarisers ignore that completely.
+
+---
+
+*Python · NLP · Streamlit · Deployed*
